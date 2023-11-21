@@ -3,7 +3,8 @@ import express from 'express'
 import bcrypt, { hash } from 'bcrypt'
 import cors from 'cors'
 import { initializeApp } from 'firebase/app'
-import { collection, deleteDoc, doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
+import { async } from '@firebase/util'
 
 // ----------- firestore credentials
 const firebaseConfig = {
@@ -134,9 +135,11 @@ app.post( '/new-patient' , ( req, res ) => {
     res.json({
       'alert': 'It is necessary to add an age'
     })
-  } else if ( !['masculino', 'femenino'].includes(gender.toLowerCase())){
+  } else if ( !gender.length ){
     res.json({
-      'alert': 'Invalid gender. Please enter "masculino" or "femenino".'
+      //!['masculino', 'femenino'].includes(gender.toLowerCase())
+      'alert': 'It is necessary to add a gender'
+      //'alert': 'Invalid gender. Please enter "masculino" or "femenino".'
     })
   } else if ( !address.length ){
     res.json({
@@ -185,6 +188,64 @@ app.post( '/new-patient' , ( req, res ) => {
     })
   })
 })
+// --------- Load Patients
+app.get( '/get-patients' , async ( req, res ) => {
+  try {
+    const patients =  [];
+    const data = await collection(db, 'patients')
+    const docs = await getDocs(data)
+    docs.forEach((doc) => {
+      patients.push(doc.data())
+    })
+    res.json({
+      'alert': 'succes',
+      patients
+    })
+  } catch (error) {
+    res.json({
+      'alert': 'Error getting data',
+      error
+    })
+  }
+})
+// --------- Delete Patients
+app.post('/delete-patients' , (req,res)  => {
+  const email = req.body.email
+  deleteDoc(doc(collection(db, 'patients'), email))
+  .then(data => {
+    res.json({
+      'alert': 'success'
+    })
+  })
+  .catch(err => {
+    res.json({
+      'alert': 'error',
+      err
+    })
+  })
+})
+// --------- Edit Patients
+app.post( '/edit-patient', async (req,res) => {
+  const{ name, lastname, email, phone, birthday, age, gender, address, treatment, blood } = req.body
+  const edited = await updateDoc(doc(db, 'patients', email), {
+    name,
+    lastname,
+    phone,
+    birthday,
+    age,
+    gender,
+    address,
+    treatment,
+    blood
+  })
+  res.json({
+    'alert': 'edited',
+    edited
+  })
+})
+
+
+
 
 // Switch on the server in listening mode
 const PORT = process.env.PORT || 5000
