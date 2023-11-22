@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <login class=""/>
+  <login />
 </template>
 
 
