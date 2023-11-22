@@ -8,4 +8,5 @@ You can directly use them in pages and other components without the need to impo
 
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
 - `<UsersLogin>` | `<users-login>` (components/Users/login.vue)
-- `<UsersRegistro>` | `<users-registro>` (components/Users/registro.vue)
+- `<UsersPatient>` | `<users-patient>` (components/Users/patient.vue)
+- `<UsersPatRegister>` | `<users-pat-register>` (components/Users/patRegister.vue)
