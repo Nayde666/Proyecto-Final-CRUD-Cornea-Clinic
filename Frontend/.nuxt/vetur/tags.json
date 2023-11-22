@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },
@@ -7,5 +8,15 @@
   },
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
+=======
+  "Tutorial": {
+    "description": "Auto imported from components/Tutorial.vue"
+  },
+  "UsersLogin": {
+    "description": "Auto imported from components/Users/login.vue"
+  },
+  "UsersRegistro": {
+    "description": "Auto imported from components/Users/registro.vue"
+>>>>>>> main
   }
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } from 'ufo'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
+<<<<<<< HEAD
 import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
@@ -11,6 +12,18 @@ import '..\\node_modules\\vuetify\\dist\\vuetify.css'
 import _6f6c098b from '..\\layouts\\default.vue'
 
 const layouts = { "_default": sanitizeComponent(_6f6c098b) }
+=======
+import NuxtError from '../layouts/error.vue'
+import NuxtLoading from './components/nuxt-loading.vue'
+import NuxtBuildIndicator from './components/nuxt-build-indicator'
+
+import '../node_modules/vuetify/dist/vuetify.css'
+
+import _5fa3735e from '../layouts/dashboard.vue'
+import _6f6c098b from './layouts/default.vue'
+
+const layouts = { "_dashboard": sanitizeComponent(_5fa3735e),"_default": sanitizeComponent(_6f6c098b) }
+>>>>>>> main
 
 export default {
   render (h, props) {
