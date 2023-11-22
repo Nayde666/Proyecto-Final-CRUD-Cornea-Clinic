@@ -1,16 +1,9 @@
 [
   {
-    "name": "inspire",
-    "path": "/inspire",
-    "component": "C:\\\\Users\\\\perla\\\\EJ-DAS\\\\Proyecto-Final-CRUD-Cornea-Clinic\\\\Frontend\\\\pages\\\\inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_21982088"
-  },
-  {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\perla\\\\EJ-DAS\\\\Proyecto-Final-CRUD-Cornea-Clinic\\\\Frontend\\\\pages\\\\index.vue",
+    "component": "C:\\\\Users\\\\perla\\\\DAS\\\\Proyecto-Final-CRUD-Cornea-Clinic\\\\Frontend\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_2f443434"
+    "_name": "_9626db4c"
   }
 ]
