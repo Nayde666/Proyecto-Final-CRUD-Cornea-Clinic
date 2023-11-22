@@ -159,11 +159,11 @@
   >
     <v-card>
       <v-card-title class="text-h5">
-        Borrar Usuarios
+        Borrar Pacientes
       </v-card-title>
 
       <v-card-text>
-        ¿Estás seguro que quieres editar el usuario?
+        ¿Estás seguro que quieres editar el paciente?
       </v-card-text>
 
       <v-card-actions>
@@ -198,17 +198,22 @@ export default {
   data() {
       return{
           headers: [
-              { text: 'Nombre', align: 'center', sortable: true, value: 'nombre'}, 
-              { text: 'A. paterno', align: 'center', sortable: true, value: 'apaterno'},
-              { text: 'A. materno', align: 'center', sortable: true, value: 'amaterno'},
-              { text: 'Telefono', align: 'center', sortable: false, value: 'telefono'},
+              { text: 'Name', align: 'center', sortable: true, value: 'name'}, 
+              { text: 'Lastname', align: 'center', sortable: true, value: 'lastname'},
               { text: 'Email', align: 'center', sortable: true, value: 'email'},
+              { text: 'Phone', align: 'center', sortable: false, value: 'phone'},
+              { text: 'Birthday', align: 'center', sortable: true, value: 'birthday'},
+              { text: 'Age', align: 'center', sortable: true, value: 'age'},
+              { text: 'Gender', align: 'center', sortable: true, value: 'gender'},
+              { text: 'Address', align: 'center', sortable: true, value: 'address'},
+              { text: 'Treatment', align: 'center', sortable: true, value: 'treatment'},
+              { text: 'Blood', align: 'center', sortable: true, value: 'blood'},
               { text: 'Acciones', align: 'center', sortable: false, value: 'Acciones'}
           ], 
           usuarios: [], 
           dialog: false, 
           email: null,
-          editUserData: {}, 
+          editPatients: {}, 
           dialogEdit: false,
           reglas: {
               requerido: value => !!value || 'Campo Requerido', 
@@ -237,8 +242,8 @@ export default {
   },
   methods: {
       async loadUsers () {
-          const usuarios = await fetch('http://localhost:5000/get-users')
-          const data = await usuarios.json()
+          const paciente = await fetch('http://localhost:5000/get-users')
+          const data = await paciente.json()
           if (data.alert === 'success'){
               this.usuarios = data.usuarios
           }
