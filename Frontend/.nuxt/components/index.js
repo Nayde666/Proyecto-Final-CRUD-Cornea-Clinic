@@ -1,6 +1,6 @@
-export { default as Tutorial } from '../../components/Tutorial.vue'
-export { default as UsersLogin } from '../../components/Users/login.vue'
-export { default as UsersRegistro } from '../../components/Users/registro.vue'
+export { default as Tutorial } from '../..\\components\\Tutorial.vue'
+export { default as UsersLogin } from '../..\\components\\Users\\login.vue'
+export { default as UsersRegistro } from '../..\\components\\Users\\registro.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
