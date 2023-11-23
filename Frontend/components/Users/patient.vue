@@ -272,27 +272,32 @@ export default {
           this.dialog = false
          // console.log('@@@ respuesta => ', rawResponse)
       }, 
-      editUser (user) {
-          console.log('@@@ user =>', user)
-          this.editUserData.nombre = user.nombre
-          this.editUserData.apaterno = user.apaterno
-          this.editUserData.amaterno = user.amaterno
-          this.editUserData.telefono= user.telefono
-          this.editUserData.email = user.email
-          this.editUserData.password = user.password
+      editPatients (user) {
+          console.log('@@@ patient=>', user)
+
+          this.editPatients.name = user.name
+          this.editPatients.lastname = user.lastname
+          this.editPatients.email = user.email
+          this.editPatients.phone= user.phone
+          this.editPatients.birthday= user.birthday
+          this.editPatients.age = user.age
+          this.editPatients.gender = user.gender
+          this.editPatients.address = user.address
+          this.editPatients.treatment = user.treatment
+          this.editPatients.blood = user.blood
           this.dialogEdit = true
       }, 
       async editar () {
           const valid = this.$refs.frmRegistro.validate()
           if (valid) {
-              console.log('@@@ editUserData', this.editUserData)
-              const rawResponse = await fetch('http://localhost:5000/edit-user',{
+              console.log('@@@ editUserData', this.editPatients)
+              const rawResponse = await fetch('http://localhost:5000/edit-patient',{
                   method: 'POST', 
                   headers: {
                       'Accept': 'application/json', 
                       'Content-Type': 'application/json'
                   }, 
-                  body: JSON.stringify(this.editUserData)
+                  body: JSON.stringify(this.editPatients)
           })
           const res = await rawResponse.json()
           this.loadUsers()
