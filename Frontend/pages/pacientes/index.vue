@@ -8,6 +8,11 @@
             <vi-patient/>
         </v-col>
     </v-row>
+    <v-row>
+        <v-col cols="5">
+            <pat-register />
+        </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -23,4 +28,5 @@ export default {
     }
 }
 </script>
+
 
