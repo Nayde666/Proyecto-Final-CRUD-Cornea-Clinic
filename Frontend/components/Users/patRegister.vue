@@ -2,29 +2,29 @@
     <div class="contenedor" style="margin:20px" >
         <v-container>
             <v-form ref="frmRegistro" v-model="frmRegistro">
-                    <v-row style="width: 100%;">
-                        <v-col cols="12" style="text-align: center;">
-                            <p class="formTit">Add new patient</p>
-                        </v-col>
-                    </v-row>
-            <v-row align="center" >
-                <v-col>
-                    <p>First name: </p>
-                    <input type="text" class="cajas" v-model="name" placeholder="Name">
-                </v-col>
-                <v-col>
-                    <p>Lastname </p>
-                    <input type="text" class="cajas" v-model="lastname" >
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <p>Email: </p>
-                    <input type="email" class="cajas" v-model="email"> 
-            </v-col>
-            <v-col>
+                <v-row style="width: 100%;">
+                    <v-col cols="12" style="text-align: center;">
+                        <p class="formTit">Add new patient</p>
+                    </v-col>
+                </v-row>
+                <v-row align="center" >
+                    <v-col>
+                        <p>First name: </p>
+                        <input type="text" class="cajas" v-model="name" placeholder="Name">
+                    </v-col>
+                    <v-col>
+                        <p>Lastname </p>
+                        <input type="text" class="cajas" v-model="lastname" >
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <p>Email: </p>
+                        <input type="email" class="cajas" v-model="email"> 
+                    </v-col>
+                    <v-col>
                         <p>Mobile </p>
-                    <input type="text" class="cajas" v-model="phone" >
+                        <input type="text" class="cajas" v-model="phone" >
                     </v-col>
                 </v-row>
                 <v-row align="center" >
@@ -41,15 +41,15 @@
                         <v-radio-group  v-model="gender" row>
                             <v-radio
                                 label="Male"
-                                value="radio-1"
+                                value="Male"
                             ></v-radio>
                             <v-radio
                                 label="Female"
-                                value="radio-2"
+                                value="Female"
                             ></v-radio>
                             <v-radio
                                 label="Other"
-                                value="radio-3"
+                                value="Other"
                             ></v-radio>
                         </v-radio-group>
                     </v-col>
@@ -73,14 +73,13 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                    <v-btn id="btnPatients"> 
+                    <v-btn id="btnPatients" @click="registraPacientes"> 
                         <p >Add patients</p>
-                </v-btn>
-
+                    </v-btn>
                 </v-row>
             </v-form>
-            </v-container>
-        </div>
+        </v-container>
+    </div>
 </template>
 
 <style>
@@ -224,17 +223,17 @@ export default {
                 })
                 const content = await rawResponse.json()
                 if (content.alert === 'success'){
-                    this.name,
-                    this.lastname, 
-                    this.email, 
-                    this.phone, 
-                    this.birthday, 
-                    this.age, 
-                    this.gender, 
-                    this.address,
-                    this.treatment, 
-                    this.blood
-                    this.$store.commit('setNewUser', true)
+                    this.name = '',
+                    this.lastname= '', 
+                    this.email='', 
+                    this.phone='', 
+                    this.birthday='', 
+                    this.age='', 
+                    this.gender='', 
+                    this.address='',
+                    this.treatment='', 
+                    this.blood='',
+                    this.$store.commit('setNewPatient', true)
                 } else if (content.alert === 'The patient already exists') {
                     //Crear alerta cuando existe. 
                 }
