@@ -3,8 +3,8 @@ export default {
   name: "Login",
   data() {
     return {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       isValid: false,
       rules: {
         vacio: value => !!value || 'Campo requerído',
@@ -13,12 +13,19 @@ export default {
     };
   },
   methods: {
-    login() {
-    //   const { username } = this;
-    //   console.log(username + "logged in")
-    },
-  },
-};
+    Login () {
+      const valid = this.$refs.formLogin.validate() 
+      if(valid) {
+        //ruta hacia pagina
+        this.$router.push('')
+      } 
+      else {
+        //alerta 
+        alert('Datos incorrectos')
+      }
+    }
+  }
+}
 </script>
 
 <template>
@@ -32,7 +39,7 @@ export default {
                         <v-toolbar-title class="text-h3 text-center font-weight-bold">Iniciar Sesión</v-toolbar-title>
                       </v-toolbar>
                       <v-card-text>
-                      <form ref="form" @submit.prevent="login()">
+                      <v-form v-model="isValid" ref="formLogin">
                              <v-text-field
                                v-model="username"
                                name="username"
@@ -52,11 +59,12 @@ export default {
                                required
                                :rules="[rules.cantidad]"
                             ></v-text-field>
-                            <v-btn type="submit" class="mt-4" color="green" value="log in">Login</v-btn>
-                       </form>
+                      </v-form>
+                      <v-card-actions>
+                        <v-btn color="green" @click="Login">Login</v-btn>
+                      </v-card-actions>
                       </v-card-text>
                    </v-card>
-                 
                 </v-flex>
              </v-layout>
           </v-container>
