@@ -11,5 +11,12 @@ export default {
 </script>
 
 <template>
-    <pat-register />
+    <div class="ma-5">
+        <v-row>
+            <v-col cols="5">
+                <pat-register />
+            </v-col>
+        </v-row>
+    </div>
+   
 </template>
