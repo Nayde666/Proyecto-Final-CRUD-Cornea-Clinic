@@ -1,86 +1,87 @@
-<template >
-    <div class="contenedor" style="margin:20px" >
-        <v-container>
-            <v-form ref="frmRegistro" v-model="frmRegistro">
-                <v-row style="width: 100%;">
-                    <v-col cols="12" style="text-align: center;">
-                        <p class="formTit">Add new patient</p>
-                    </v-col>
-                </v-row>
-                <v-row align="center" >
-                    <v-col>
-                        <p>First name: </p>
-                        <input type="text" class="cajas" v-model="name" placeholder="Name">
-                    </v-col>
-                    <v-col>
-                        <p>Lastname </p>
-                        <input type="text" class="cajas" v-model="lastname" >
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col>
-                        <p>Email: </p>
-                        <input type="email" class="cajas" v-model="email"> 
-                    </v-col>
-                    <v-col>
-                        <p>Mobile </p>
-                        <input type="text" class="cajas" v-model="phone" >
-                    </v-col>
-                </v-row>
-                <v-row align="center" >
-                    <v-col cols="4">
-                        <p>Date of birth </p>
-                        <input type="date" class="cajasB" v-model="birthday">
-                    </v-col>
-                    <v-col cols="4">
-                        <p>Age </p>
-                        <input type="number" class="cajasC" v-model="age">  
-                    </v-col>
-                    <v-col cols="4">
-                        <p>Gender</p>
-                        <v-radio-group  v-model="gender" row>
-                            <v-radio
-                                label="Male"
-                                value="Male"
-                            ></v-radio>
-                            <v-radio
-                                label="Female"
-                                value="Female"
-                            ></v-radio>
-                            <v-radio
-                                label="Other"
-                                value="Other"
-                            ></v-radio>
-                        </v-radio-group>
-                    </v-col>
-                </v-row>
-                <v-row align="center" >
-                    <v-col>
-                        <p> Address </p>
-                        <input type="text" class="cajasA" v-model="address">
-                    </v-col>
-                </v-row>
-                <v-row align="center" >
-                    <v-col>
-                        <p>Treatment </p>
-                        <input type="text" class="cajasP" v-model="treatment">
-                    </v-col>
-                </v-row>
-                <v-row align="center">
-                    <v-col>
-                        <p>Blood Type: </p>
-                        <input type="text" class="cajas" v-model="blood">
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-btn id="btnPatients" @click="registraPacientes"> 
-                        <p >Add patients</p>
-                    </v-btn>
-                </v-row>
-            </v-form>
-        </v-container>
-    </div>
-</template>
+<template>
+    <v-form ref="frmRegistro" v-model="frmRegistro">
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="12" style="text-align: center;">
+            <v-subheader class="formTit">Add New Patient</v-subheader>
+          </v-col>
+        </v-row>
+  
+        <v-row align="center">
+          <v-col cols="12" md="6">
+            <p>First name: </p>
+            <input type="text" class="cajas" v-model="name" placeholder="Name">
+          </v-col>
+  
+          <v-col cols="12" md="6">
+            <p>Lastname </p>
+            <input type="text" class="cajas" v-model="lastname" >
+          </v-col>
+        </v-row>
+  
+        <v-row align="center">
+          <v-col cols="12" md="6">
+            <p>Email: </p>
+            <input type="email" class="cajas" v-model="email"> 
+          </v-col>
+  
+          <v-col cols="12" md="6">
+            <p>Mobile </p>
+            <input type="text" class="cajas" v-model="phone" >
+          </v-col>
+        </v-row>
+  
+        <v-row align="center">
+          <v-col cols="12" md="4">
+            <p>Date of birth </p>
+            <input type="date" class="cajasB" v-model="birthday">
+          </v-col>
+  
+          <v-col cols="12" md="4">
+            <p>Age </p>
+            <input type="number" class="cajasC" v-model="age">  
+          </v-col>
+  
+          <v-col cols="12" md="4">
+            <v-radio-group v-model="gender" row>
+              <v-radio label="Male" value="Male"></v-radio>
+              <v-radio label="Female" value="Female"></v-radio>
+              <v-radio label="Other" value="Other"></v-radio>
+            </v-radio-group>
+          </v-col>
+        </v-row>
+  
+        <v-row align="center">
+          <v-col cols="12">
+            <p> Address </p>
+            <input type="text" class="cajasA" v-model="address">
+          </v-col>
+        </v-row>
+  
+        <v-row align="center">
+          <v-col cols="12">
+            <p>Treatment </p>
+            <input type="text" class="cajasP" v-model="treatment">
+          </v-col>
+        </v-row>
+  
+        <v-row align="center">
+          <v-col cols="12">
+            <p>Blood Type: </p>
+            <input type="text" class="cajas" v-model="blood">
+          </v-col>
+        </v-row>
+  
+        <v-row justify="center">
+          <v-btn id="btnPatients" @click="registraPacientes">
+            <v-icon left>mdi-account-plus</v-icon>
+            Add Patient
+          </v-btn>
+        </v-row>
+      </v-container>
+    </v-form>
+  </template>
+  
 
 <style>
 .p {

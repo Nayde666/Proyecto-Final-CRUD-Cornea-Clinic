@@ -1,25 +1,23 @@
-<script>
-   import draweVue from '~/components/Dashboard/drawe.vue';
-   export default {
-    components: {
-        draweVue
-    }, data () {
-        return {
+<template>
+  <v-app>
+    <vi-drawer-vue />
+    <v-main>
+      <Nuxt />
+    </v-main>
+  </v-app>
+</template>
 
-        }
+<script>
+import viDrawerVue from '~/components/Dashboard/viDrawer.vue';
+export default {
+  components: {
+    viDrawerVue
+  },
+  data() {
+    return {
+
     }
+  }
 }
 </script>
 
-<template>
-    <v-app>
-        <draweVue/>
-            <v-main>
-                <Nuxt />
-            </v-main> 
-    </v-app>
-</template>
-
-<style scoped>
-
-</style>
