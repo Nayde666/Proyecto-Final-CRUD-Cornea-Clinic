@@ -239,15 +239,14 @@ app.post( '/edit-patient', async (req,res) => {
     blood
   })
   res.json({
-    'alert': 'edited',
-    edited
+    'alert': 'successful edition ',
+    
   })
 })
 
 
 // --------- CRUD APPOINTMENTS --------- 
-
-// NEW APPOINTMENT
+// New Appointment
 app.post('/new-appointment', async (req, res) => {
   let { name, email, phone, age, gender, date, time, typeofreservation } = req.body
   // Ensure that the fields are not sent empty.
@@ -284,7 +283,6 @@ app.post('/new-appointment', async (req, res) => {
       'alert': 'It is necessary to add a typeofreservation'
     })
   }
-
   try {
     /*From the patient collection bring the email to verify 
     that it exists in order to register an appointment.*/
@@ -323,7 +321,6 @@ app.post('/new-appointment', async (req, res) => {
         'alert': 'An appointment is already scheduled with this user.'
       })
     }
-
     const data = {
       name,
       email,
@@ -334,7 +331,6 @@ app.post('/new-appointment', async (req, res) => {
       time,
       typeofreservation
     }
-
     setDoc(citaDoc, data).then(() => {
       res.json({
         'alert': 'success',
@@ -348,6 +344,66 @@ app.post('/new-appointment', async (req, res) => {
     })
   }
 })
+// --------- Load appointments --------- 
+app.get('/get-appointments', async ( req, res ) => {
+    try {
+    const citas =  []
+    const data = await collection(db, 'citas')
+    const docs = await getDocs(data)
+    docs.forEach((doc) => {
+      citas.push(doc.data())
+    })
+    res.json({
+      'alert': 'succes',
+      citas
+    })
+  } catch (error) {
+    res.json({
+      'alert': 'Error getting data',
+      error
+    })
+  }
+})
+// --------- Delete appointments --------- 
+app.post('/delete-appointment' , (req,res)  => {
+  const email = req.body.email
+  deleteDoc(doc(collection(db, 'citas'), email))
+  .then(data => {
+    res.json({
+      'alert': 'success'
+    })
+  })
+  .catch(err => {
+    res.json({
+      'alert': 'error',
+      err
+    })
+  })
+})
+// --------- Edit appointments --------- 
+app.post( '/edit-appointment', async (req,res) => {
+  const{ name, email, phone, age, gender, date, time, typeofreservation } = req.body
+  const edited = await updateDoc(doc(db, 'citas', email), {
+    name,
+    phone,
+    age,
+    gender,
+    date,
+    time,
+    typeofreservation
+  })
+  res.json({
+    'alert': 'successful edition ',
+  })
+})
+
+// ----------------- Switch on the server in listening mode ----------------------
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
+    console.log(`Escuchando Puerto: ${PORT}`)
+})
+
+
 
 // Switch on the server in listening mode
 const PORT = process.env.PORT || 5000
