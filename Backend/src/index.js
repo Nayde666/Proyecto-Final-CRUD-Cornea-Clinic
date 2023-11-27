@@ -3,7 +3,7 @@ import express from 'express'
 import bcrypt, { hash } from 'bcrypt'
 import cors from 'cors'
 import { initializeApp } from 'firebase/app'
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc, query, where } from 'firebase/firestore'
 import { async } from '@firebase/util'
 
 // ----------- firestore credentials
@@ -191,7 +191,7 @@ app.post( '/new-patient' , ( req, res ) => {
 // --------- Load Patients
 app.get( '/get-patients' , async ( req, res ) => {
   try {
-    const patients =  [];
+    const patients =  []
     const data = await collection(db, 'patients')
     const docs = await getDocs(data)
     docs.forEach((doc) => {
@@ -245,11 +245,112 @@ app.post( '/edit-patient', async (req,res) => {
 })
 
 
+// --------- CRUD APPOINTMENTS --------- 
 
+// NEW APPOINTMENT
+app.post('/new-appointment', async (req, res) => {
+  let { name, email, phone, age, gender, date, time, typeofreservation } = req.body
+  // Ensure that the fields are not sent empty.
+  if( !name.length ){
+    res.json({
+      'alert': 'It is necessary to add a name address'
+    })
+  } else if (!email.length){
+    res.json({
+      'alert': 'It is necessary to add an e-mail address'
+    })
+  } else if (!phone.length ) {
+    res.json({
+      'alert': 'It is necessary to add a phone'
+    })
+  } else if (!age.length ) {
+    res.json({ 
+      'alert': 'It is necessary to add an age'
+    })
+  } else if(!gender.length){
+    res.json({ 
+      'alert': 'It is necessary to add gender'
+    })
+  } else if (!date.length){
+    res.json({ 
+      'alert': 'It is necessary to add date'
+    })
+  } else if (!time.length){
+    res.json({ 
+      'alert': 'It is necessary to add date'
+    })
+  } else if (!typeofreservation.length ) {
+    res.json({ 
+      'alert': 'It is necessary to add a typeofreservation'
+    })
+  }
+
+  try {
+    /*From the patient collection bring the email to verify 
+    that it exists in order to register an appointment.*/
+
+    const patients = collection(db, 'patients')
+    const patientDoc = doc(patients, email)
+    const patient = await getDoc(patientDoc)
+
+    // ! is the negation
+    if (!patient.exists()) {
+      return res.json({
+        'alert': 'The user is not registered in the database'
+      })
+    }
+    // Comparar que el date y time no coincidan con un registro ya guardado
+    const citas = collection(db, 'citas')
+    const citaOcupada = await getDocs(
+      query(
+        citas,
+        where('date', '==', date),
+        where('time', '==', time)
+      )
+    )
+
+    if (!citaOcupada.empty) {
+      return res.json({
+        'alert': 'Sorry, this date and time are busy. Please try another time.'
+      })
+    }
+
+    const citaDoc = doc(citas, email)
+    const cita = await getDoc(citaDoc)
+
+    if (cita.exists()) {
+      return res.json({
+        'alert': 'An appointment is already scheduled with this user.'
+      })
+    }
+
+    const data = {
+      name,
+      email,
+      phone,
+      age,
+      gender,
+      date,
+      time,
+      typeofreservation
+    }
+
+    setDoc(citaDoc, data).then(() => {
+      res.json({
+        'alert': 'success',
+        data
+      })
+    })
+  } catch (error) {
+    res.json({
+      'alert': 'Error de conexión',
+      error: error.message 
+    })
+  }
+})
 
 // Switch on the server in listening mode
 const PORT = process.env.PORT || 5000
-
 app.listen(PORT, () => {
     console.log(`Escuchando Puerto: ${PORT}`)
 })
